@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import web.dao.CarDaoImpl;
 import web.service.CarService;
 
 import java.util.Optional;
@@ -23,8 +24,7 @@ public class CarController {
 
     @GetMapping()
     public String printCars(@RequestParam(value = "count")Optional<Integer> count, ModelMap modelMap) {
-        modelMap.addAttribute("cars",
-                carService.getCars(carService.createCarsList(), count.orElse(carService.createCarsList().size())));
+        modelMap.addAttribute("cars", carService.getCars(count.orElse(0)));
         return "cars";
     }
 
